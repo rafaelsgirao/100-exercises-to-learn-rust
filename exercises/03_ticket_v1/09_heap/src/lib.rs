@@ -13,7 +13,9 @@ mod tests {
 
     #[test]
     fn string_size() {
-        assert_eq!(size_of::<String>(), todo!());
+        // String is three pointers of size `usize`:
+        // in 64-bit machines you need 64 / 8 = 8 bytes to reference memory (i.e, for a pointer)
+        assert_eq!(size_of::<String>(), 8 * 3); // = 24
     }
 
     #[test]
@@ -23,6 +25,6 @@ mod tests {
         // but, in general, the memory layout of structs is a more complex topic.
         // If you're curious, check out the "Type layout" section of The Rust Reference
         // https://doc.rust-lang.org/reference/type-layout.html for more information.
-        assert_eq!(size_of::<Ticket>(), todo!());
+        assert_eq!(size_of::<Ticket>(), 8 * 3 * 3); // Three Strings, three times as above
     }
 }
