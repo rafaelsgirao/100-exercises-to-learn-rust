@@ -2,6 +2,28 @@
 //  unless a certain operation has been performed on it.
 //  You can see the expected API in the tests below.
 
+#[derive(Debug)]
+struct DropBomb {
+    armed: bool,
+}
+// trait DropBomb {
+//     pub fn new() -> Self;
+// }
+impl DropBomb {
+    pub fn new() -> Self {
+        Self { armed: true }
+
+    }
+    pub fn defuse(&mut self) {
+        self.armed = false;
+    }
+} 
+
+impl Drop for DropBomb {
+    fn drop(&mut self) {
+        assert_eq!(self.armed, false);
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
